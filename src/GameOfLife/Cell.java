@@ -23,7 +23,6 @@ public class Cell {
         return " ";
     }
 
-
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();

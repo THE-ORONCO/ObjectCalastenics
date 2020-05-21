@@ -22,14 +22,14 @@ public class GameCoordinator {
 
     private static CellState checkSurroundingCells(int x, int y, Cell[][] cells) {
         int livingNeighbours = 0;
-        livingNeighbours += cells[x(x + 1, cells)][y(y + 1, cells)].isAlive() ? 1 : 0;
-        livingNeighbours += cells[x(x + 1, cells)][y(y, cells)].isAlive() ? 1 : 0;
-        livingNeighbours += cells[x(x + 1, cells)][y(y - 1, cells)].isAlive() ? 1 : 0;
-        livingNeighbours += cells[x(x, cells)][y(y + 1, cells)].isAlive() ? 1 : 0;
-        livingNeighbours += cells[x(x, cells)][y(y - 1, cells)].isAlive() ? 1 : 0;
-        livingNeighbours += cells[x(x - 1, cells)][y(y + 1, cells)].isAlive() ? 1 : 0;
-        livingNeighbours += cells[x(x - 1, cells)][y(y, cells)].isAlive() ? 1 : 0;
-        livingNeighbours += cells[x(x - 1, cells)][y(y - 1, cells)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x+1, cells[0].length)][handle(y + 1, cells[0].length)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x+1, cells[0].length)][handle(y, cells[0].length)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x+1, cells[0].length)][handle(y-1, cells[0].length)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x , cells[0].length)][handle(y+1, cells[0].length)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x , cells[0].length)][handle(y-1, cells[0].length)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x-1, cells[0].length)][handle(y + 1, cells[0].length)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x-1, cells[0].length)][handle(y, cells[0].length)].isAlive() ? 1 : 0;
+        livingNeighbours += cells[handle(x-1, cells[0].length)][handle(y-1, cells[0].length)].isAlive() ? 1 : 0;
         if (cells[x][y].isAlive()) return aliveChecks(livingNeighbours);
         return deadChecks(livingNeighbours);
     }
@@ -42,11 +42,7 @@ public class GameCoordinator {
         return livingNeighbours == 3 ? CellState.ALIVE : CellState.DEAD;
     }
 
-    private static int y(int y, Cell[][] cells) {
-        return (y + cells[0].length) % cells[0].length;
-    }
-
-    private static int x(int x, Cell[][] cells) {
-        return (x + cells.length) % cells.length;
+    private static int handle(int coordinate, int limit){
+        return (coordinate+ limit) % limit;
     }
 }
